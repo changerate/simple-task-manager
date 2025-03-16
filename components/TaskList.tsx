@@ -22,7 +22,13 @@ type TaskType = {
 export default function TaskList() {
     // Lists and Data
     // ===========================================
-    const [taskList, setTaskList] = useState<TaskType[]>([]);
+    const [taskList, setTaskList] = useState<TaskType[]>([
+        {
+            name: 'This is your first task! Try marking it as complete or swiping to delete it.',
+            status: 'Open',
+            id: 1,
+        }
+    ]);
 
     const textInputRef = useRef<TextInput>(null); // Create a ref for the TextInput
 
@@ -34,8 +40,12 @@ export default function TaskList() {
 
 
 
-    // Add a task to the list by updating the taskList state
-    // ===========================================
+    /**
+     * Add a task to the list by updating the taskList state and
+     * assigning the current time as the ID.
+     * Check for tasks that are blank (either just spaces or not defined).
+     * @param text 
+     */
     const handleAddTask = (text: string) => {
         if (text.trim() === '' || text === undefined) {
             console.log("Error, task name cannot be empty.")
@@ -64,8 +74,11 @@ export default function TaskList() {
 
 
 
-    // Render each item in the flatlist by passing the propertiesto the Task component
-    // ===========================================
+    /**
+     * Render each item in the flatlist by passing the properties to the Task component.
+     * @param param0 
+     * @returns 
+     */
     const renderItem = ({ item }: { item: { name: string; status: string; id: number } }) => {
         return (
             <Task
@@ -126,8 +139,7 @@ export default function TaskList() {
 // ====================================================================================================
 // Styles 
 // ====================================================================================================
-
-
+    
 const styles = StyleSheet.create({
     container: {
         flex: 1,
