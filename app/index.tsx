@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     },
     safeArea: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#F9F9F9',
     },
 });

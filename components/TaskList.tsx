@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#F9F9F9',
         // paddingVertical: 20,
     },
     keyboardView: {
