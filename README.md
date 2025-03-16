@@ -40,4 +40,6 @@ In the output, you'll find options to open the app in a
 
 If I were to make this a full fledged (but still simple) task manager, I would want to give the user the ability to hide completed tasks, as well as *edit existing tasks*.
 
+I would also like to change the sorting algorithm. Right now, whenever a task is marked as complete or marked as open, the entire list is split into two arrays, sorted by date, then put back into the taskList. I think that this is very inefficient and needs a redo. 
+
 For a full list of things that I would like to add to this app, checkout my developer notes: [devNotes.md](./devNotes.md).

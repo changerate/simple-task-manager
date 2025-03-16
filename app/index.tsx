@@ -1,14 +1,21 @@
 import { StyleSheet, StatusBar } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import TaskList from '@/components/TaskList';
+import AboutMePopupButton from '@/components/AboutMePopupButton';
+import AboutMeWindow from '@/components/AboutMeWindow';
+import { useState } from 'react';
 
 
 
 export default function App() {
+    const [ showWindow, setShowWindow ] = useState(false); // only used for the About Me window
+
     return (
         <SafeAreaProvider style={styles.safeArea}>
             <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
                 <TaskList />
+                <AboutMePopupButton setShowWindow={setShowWindow} />
+                <AboutMeWindow showWindow={showWindow} setShowWindow={setShowWindow} />
             </SafeAreaView>
         </SafeAreaProvider>
     );
