@@ -16,18 +16,16 @@ export default function Task({
     name,
     status,
     id,
-    taskList,
     setTaskList,
 }: {
     name: string;
     status: string;
     id: number;
-    taskList: TaskType[];
     setTaskList: React.Dispatch<React.SetStateAction<TaskType[]>>;
 }) {
 
         
-        
+
     /**
      * Filter the list into two arrays, once for Open tasks and once for Done tasks.
      * Sort each array by id (affectively sorting by time).

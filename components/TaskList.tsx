@@ -85,7 +85,6 @@ export default function TaskList() {
                 name={item.name}
                 status={item.status}
                 id={item.id}
-                taskList={taskList}
                 setTaskList={setTaskList}
             />
         )
@@ -107,8 +106,8 @@ export default function TaskList() {
             >
                 <TextInput
                     style={styles.textInput}
-                    placeholderTextColor="black"
                     ref={textInputRef}
+                    placeholderTextColor="black"
                     placeholder="Add a new task"
                     onChangeText={(text) => { name: text }}
                     onSubmitEditing={(event) => handleAddTask(event.nativeEvent.text)}
@@ -139,7 +138,7 @@ export default function TaskList() {
 // ====================================================================================================
 // Styles 
 // ====================================================================================================
-    
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
