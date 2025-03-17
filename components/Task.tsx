@@ -3,7 +3,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { SharedValue } from 'react-native-reanimated';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import React from 'react';
 
 
 type TaskType = {

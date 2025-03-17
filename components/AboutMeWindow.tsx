@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { underDampedSpringCalculations } from 'react-native-reanimated/lib/typescript/animation/springUtils';
 

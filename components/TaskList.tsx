@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import Task from './Task';
 import { useEffect, useState, useRef } from 'react';
-import React from 'react';
+
+
 
 type TaskType = {
     name: string;
