@@ -144,7 +144,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#F9F9F9',
-        // paddingVertical: 20,
+        maxWidth: 1000,
+        marginHorizontal: 'auto',
     },
     keyboardView: {
         flex: 1,

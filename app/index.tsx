@@ -11,7 +11,7 @@ export default function App() {
     const [ showWindow, setShowWindow ] = useState(false); // only used for the About Me window
 
     return (
-        <SafeAreaProvider style={styles.safeArea}>
+        <SafeAreaProvider style={styles.safeAreaProvider}>
             <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
                 <TaskList />
                 <AboutMePopupButton setShowWindow={setShowWindow} />
@@ -27,8 +27,9 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: StatusBar.currentHeight,
         // backgroundColor: 'red'
+        // alignContent: 'center',
     },
-    safeArea: {
+    safeAreaProvider: {
         flex: 1,
         backgroundColor: '#F9F9F9',
     },
