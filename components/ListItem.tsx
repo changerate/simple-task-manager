@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
         padding: 18,
 
         borderRadius: 15,
-        // backgroundColor: '#E4EFFF',
 
         // iOS Shadow
         shadowColor: '#000', // Shadow color
@@ -144,7 +143,6 @@ const styles = StyleSheet.create({
         padding: 18,
 
         borderRadius: 15,
-        // backgroundColor: '#F1F6EB',
 
         // iOS Shadow
         shadowColor: '#000', // Shadow color
