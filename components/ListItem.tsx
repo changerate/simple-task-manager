@@ -92,14 +92,14 @@ export default function Task(props: ListItemProps) {
                 rightThreshold={40}
                 renderRightActions={RightAction}>
                 <View style={[
-                    styles.openTask,
+                    status === '1' ? styles.taskStatus1 : styles.taskStatus2,
                     { backgroundColor: bgColor }
                 ]}>
                     <TouchableOpacity
-                        style={status === '2' ? styles.doneButton : styles.openButton}
+                        style={status === '1' ? styles.buttonStatus1 : styles.buttonStatus2}
                         onPress={() => handleCheckmarkClick({ name, status, id, bgColor })}
                     ></TouchableOpacity>
-                    <Text style={status === '2' ? styles.doneText : styles.openText}>{name}</Text>
+                    <Text style={status === '2' ? styles.textStatus2 : styles.textStatus1}>{name}</Text>
                 </View>
             </ReanimatedSwipeable>
         </GestureHandlerRootView >
@@ -113,7 +113,7 @@ export default function Task(props: ListItemProps) {
 // Styles 
 // ====================================================================================================
 const styles = StyleSheet.create({
-    openTask: {
+    taskStatus1: {
         flex: 1,
         marginVertical: 8,
         marginHorizontal: 20,
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         // Android Shadow
         elevation: 5, // Elevation for Android        
     },
-    doneTask: {
+    taskStatus2: {
         flex: 1,
         marginVertical: 8,
         marginHorizontal: 20,
@@ -154,25 +154,25 @@ const styles = StyleSheet.create({
         elevation: 5, // Elevation for Android
 
     },
-    openText: {
+    textStatus1: {
         paddingHorizontal: 12,
         fontSize: 15,
         color: 'black',
     },
-    doneText: {
+    textStatus2: {
         paddingHorizontal: 12,
         fontSize: 15,
         color: '#969696'
     },
-    openButton: {
+    buttonStatus1: {
         borderRadius: 40,
         height: 30,
         width: 30,
         backgroundColor: 'white',
-        borderColor: 'black',
+        borderColor: '#rgba(0, 0, 0, 0.45)',
         borderWidth: 1,
     },
-    doneButton: {
+    buttonStatus2: {
         borderRadius: 40,
         height: 30,
         width: 30,
