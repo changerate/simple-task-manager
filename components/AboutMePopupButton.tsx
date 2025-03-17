@@ -9,7 +9,7 @@ export default function AboutMePopupButton(
         <TouchableOpacity
             style={styles.popUpButton}
             onPress={() => setShowWindow(true)}>
-            <Text style={{ color: '#717171', fontFamily: 'Times New Roman', fontWeight: 'bold' }}>i</Text>
+            <Text style={{ color: '#000', opacity: 0.3, fontSize: 19, fontFamily: 'Times New Roman', fontWeight: 'bold' }}>i</Text>
         </TouchableOpacity>
     )
 }
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         justifyContent: 'center',
         alignItems: 'center',
-        bottom: 35,
-        left: 10,
+        bottom: 40,
+        left: 20,
         height: 30,
         width: 30,
         // backgroundColor: 'red',
@@ -35,9 +35,9 @@ const styles = StyleSheet.create({
         borderWidth: 3,
 
         // iOS Shadow
-        shadowColor: '#000000', // Shadow color
+        shadowColor: '#000', // Shadow color
         shadowOffset: { width: 0, height: 4 }, // Offset for the shadow
-        shadowOpacity: 0.1, // Opacity of the shadow
+        shadowOpacity: 0.15, // Opacity of the shadow
         shadowRadius: 13, // Blur radius of the shadow
 
         // Android Shadow

@@ -1,18 +1,23 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { underDampedSpringCalculations } from 'react-native-reanimated/lib/typescript/animation/springUtils';
+
+
 
 export default function AboutMeWindow(
     { showWindow, setShowWindow }:
         { showWindow: boolean, setShowWindow: React.Dispatch<React.SetStateAction<boolean>> }) {
     return (
-        <View 
+        <View
             style={[
                 styles.container,
                 { display: showWindow ? 'flex' : 'none' },
             ]}
             pointerEvents={showWindow ? 'auto' : 'none'}>
+            <View style={styles.backgroundLayer}></View>
+
             {showWindow &&
-                <View style={styles.AboutMeWindow}>
+                <View style={styles.aboutMeWindow}>
                     <View style={styles.exitContainer}>
                         <Text
                             style={styles.exit}
@@ -34,6 +39,10 @@ export default function AboutMeWindow(
 }
 
 
+// ====================================================================================================
+// Styles 
+// ====================================================================================================
+
 const styles = StyleSheet.create({
     container: {
         width: '100%',
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    AboutMeWindow: {
+    aboutMeWindow: {
         height: 400,
         width: 250,
         marginHorizontal: 'auto',
@@ -71,7 +80,15 @@ const styles = StyleSheet.create({
         elevation: 5, // Elevation for Android
     },
     exit: {
-        // backgroundColor: 'red',
         paddingVertical: 6,
+    },
+    backgroundLayer: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        paddingHorizontal: 'auto',
+        backgroundColor: '#888',
+        // backgroundColor: 'red',
+        opacity: 0.3,
     },
 });
