@@ -5,7 +5,12 @@ export default function AboutMeWindow(
     { showWindow, setShowWindow }:
         { showWindow: boolean, setShowWindow: React.Dispatch<React.SetStateAction<boolean>> }) {
     return (
-        <View style={styles.container}>
+        <View 
+            style={[
+                styles.container,
+                { display: showWindow ? 'flex' : 'none' },
+            ]}
+            pointerEvents={showWindow ? 'auto' : 'none'}>
             {showWindow &&
                 <View style={styles.AboutMeWindow}>
                     <View style={styles.exitContainer}>
