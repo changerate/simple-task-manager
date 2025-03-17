@@ -26,13 +26,11 @@ interface ListItem {
 
 interface ListItemProps {
     listItem: ListItem;
-    bgColor: string;
     onClick: ( ListItem: ListItem, typeOfClick: string ) => void;
 }
 
 export default function Task(props: ListItemProps){
     const { name, status, id } = props.listItem;
-    const { bgColor } = props;
     const { onClick } = props;
 
 
@@ -121,7 +119,7 @@ const styles = StyleSheet.create({
         padding: 18,
         
         borderRadius: 15,
-        // backgroundColor: '#E4EFFF',
+        backgroundColor: '#E4EFFF',
         
         // iOS Shadow
         shadowColor: '#000', // Shadow color
