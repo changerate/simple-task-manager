@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#F9F9F9',
-        maxWidth: 1000,
-        marginHorizontal: 'auto',
+        maxWidth: Platform.select({ web: 600 }), // Wider for web
+        marginHorizontal: Platform.select({ web: 'auto' })
     },
     keyboardView: {
         flex: 1,

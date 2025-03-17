@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: StatusBar.currentHeight,
         // backgroundColor: 'red'
-        // alignContent: 'center',
     },
     safeAreaProvider: {
         flex: 1,
