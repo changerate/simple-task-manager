@@ -128,10 +128,11 @@ const styles = StyleSheet.create({
         paddingRight: 40,
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 15,
         padding: 18,
+        
+        borderRadius: 15,
         backgroundColor: '#E4EFFF',
-
+        
         // iOS Shadow
         shadowColor: '#000', // Shadow color
         shadowOffset: { width: 0, height: 4 }, // Offset for the shadow
@@ -145,11 +146,13 @@ const styles = StyleSheet.create({
         flex: 1,
         marginVertical: 8,
         marginHorizontal: 20,
+        paddingRight: 40,
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 15,
         padding: 18,
-        backgroundColor: '#E8FCD2',
+
+        borderRadius: 15,
+        backgroundColor: '#F1F6EB',
 
         // iOS Shadow
         shadowColor: '#000', // Shadow color
@@ -184,7 +187,7 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
         backgroundColor: '#CDDEB9',
-        borderColor: 'grey',
+        borderColor: 'white',
         borderWidth: 1,
     },
     deleteButton: {
