@@ -8,35 +8,36 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
 } from 'react-native';
-import Task from './Task';
+import Task from './ListItem';
 import { useEffect, useState, useRef } from 'react';
 
 
 
-// type TaskType = {
-//     name: string;
-//     status: string;
-//     id: number;
-// }
 
-
-interface TaskProps {
+interface TaskItemProps {
     name: string;
-    status: string;
+    status: '1' | '2';
     id: number;
+    bgColor: string
 }
 
 
 
 
 export default function TaskList() {
+
     // Lists and Data
     // ===========================================
-    const [taskList, setTaskList] = useState<TaskProps[]>([
+
+    const bgColorOpenTask = "#E4EFFF";
+    const bgColorDoneTask = "#F1F6EB";
+
+    const [taskList, setTaskList] = useState<TaskItemProps[]>([
         {
             name: 'This is your first task! Try marking it as complete or swiping to delete it.',
-            status: 'Open',
+            status: '1',
             id: 1,
+            bgColor: bgColorOpenTask,
         }
     ]);
 
@@ -66,10 +67,11 @@ export default function TaskList() {
         }
         else {
             // initialize new task
-            const newTask = {
+            const newTask: TaskItemProps = {
                 name: text,
-                status: 'Open',
-                id: Date.now()
+                status: '1',
+                id: Date.now(),
+                bgColor: bgColorOpenTask,
             };
 
             // add new task to list
@@ -86,26 +88,29 @@ export default function TaskList() {
 
     /**
      * This function handles the click abstraction from the ListItem component.
-     * The purpose is to abstract the ListItem away and only provide access to the types of clicks.
+     * The purpose is to abstract the TaskItemProps away and only provide access to the types of clicks.
      * @param task (type TaskProps)
      * @param typeOfClick 
      */
-    const handleTaskClick = (task: TaskProps, typeOfClick: string) => {
+    const handleTaskClick = (task: TaskItemProps, typeOfClick: string) => {
         console.log("Task clicked!");
 
         if (typeOfClick == 'checkedBox') {
             setTaskList((prevTaskList) => {
                 const updatedTaskList = prevTaskList.map((eachTask) =>
                     eachTask.id === task.id
-                        ? { ...eachTask, status: task.status === 'Open' ? 'Done' : 'Open' }
+                        ? { ...eachTask, 
+                            status: task.status === '1' ? '2' as '1' | '2' : '1' as '1' | '2',
+                            bgColor: task.status === '1' ? bgColorDoneTask : bgColorOpenTask,
+                        }
                         : eachTask
                 );
 
                 const allOpenTasksArray = updatedTaskList
-                    .filter((eachTask) => eachTask.status === 'Open')
+                    .filter((eachTask) => eachTask.status === '1')
                     .sort((a, b) => b.id - a.id);
                 const allDoneTasksArray = updatedTaskList
-                    .filter((eachTask) => eachTask.status === 'Done')
+                    .filter((eachTask) => eachTask.status === '2')
                     .sort((a, b) => b.id - a.id);
 
                 console.log(allOpenTasksArray);
@@ -127,11 +132,11 @@ export default function TaskList() {
 
 
     /**
-     * Render each item in the flatlist by passing the properties to the Task component.
+     * Render each item in the flatlist by passing the properties to the ListItem component.
      * @param param0 
      * @returns 
      */
-    const renderItem = ({ item }: { item: TaskProps }) => {
+    const renderItem = ({ item }: { item: TaskItemProps }) => {
         return (
             <Task
                 listItem={item}

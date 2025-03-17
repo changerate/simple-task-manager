@@ -20,22 +20,23 @@ import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native
 
 interface ListItem {
     name: string;
-    status: string;
+    status: '1' | '2';
     id: number;
+    bgColor: string;
 }
 
 interface ListItemProps {
     listItem: ListItem;
-    onClick: ( ListItem: ListItem, typeOfClick: string ) => void;
+    onClick: (ListItem: ListItem, typeOfClick: string) => void;
 }
 
-export default function Task(props: ListItemProps){
-    const { name, status, id } = props.listItem;
+export default function Task(props: ListItemProps) {
+    const { name, status, id, bgColor } = props.listItem;
     const { onClick } = props;
 
 
     /**
-     * Filter the list into two arrays, once for Open tasks and once for Done tasks.
+     * Filter the list into two arrays, for status 1 and status 2.
      * Sort each array by id (affectively sorting by time).
      * Append the arrays together and assign the result to the taskList.
      * @param clickedTask of ListItem
@@ -77,7 +78,7 @@ export default function Task(props: ListItemProps){
             );
         }
 
-        onClick({name, status, id}, "delete");
+        onClick({ name, status, id, bgColor }, "delete");
     }
 
 
@@ -90,15 +91,18 @@ export default function Task(props: ListItemProps){
             <ReanimatedSwipeable
                 rightThreshold={40}
                 renderRightActions={RightAction}>
-                <View style={status === "Done" ? styles.doneTask : styles.openTask}>
+                <View style={[
+                    styles.openTask,
+                    { backgroundColor: bgColor }
+                ]}>
                     <TouchableOpacity
-                        style={status === "Done" ? styles.doneButton : styles.openButton}
-                        onPress={() => handleCheckmarkClick({ name, status, id })}
+                        style={status === '2' ? styles.doneButton : styles.openButton}
+                        onPress={() => handleCheckmarkClick({ name, status, id, bgColor })}
                     ></TouchableOpacity>
-                    <Text style={status === "Done" ? styles.doneText : styles.openText}>{name}</Text>
+                    <Text style={status === '2' ? styles.doneText : styles.openText}>{name}</Text>
                 </View>
             </ReanimatedSwipeable>
-        </GestureHandlerRootView>
+        </GestureHandlerRootView >
     );
 }
 
@@ -117,10 +121,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 18,
-        
+
         borderRadius: 15,
-        backgroundColor: '#E4EFFF',
-        
+        // backgroundColor: '#E4EFFF',
+
         // iOS Shadow
         shadowColor: '#000', // Shadow color
         shadowOffset: { width: 0, height: 4 }, // Offset for the shadow
@@ -140,7 +144,7 @@ const styles = StyleSheet.create({
         padding: 18,
 
         borderRadius: 15,
-        backgroundColor: '#F1F6EB',
+        // backgroundColor: '#F1F6EB',
 
         // iOS Shadow
         shadowColor: '#000', // Shadow color
