@@ -5,60 +5,51 @@ import { SharedValue } from 'react-native-reanimated';
 import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 
 
-type TaskType = {
-    status: string;
+// ======================================================================================
+// This abstracted component can take click interactions. 
+// The click interactions can be applied to it's button (checkmark like), 
+// as well as the swipe button for deletion. 
+// In the future I would like to add the click ability for editing names.
+// 
+// I wrote this component specifically for the tech screening internship.
+// Carlos Vargas, March 17th, 2025
+// ======================================================================================
+
+
+
+
+interface ListItem {
     name: string;
+    status: string;
     id: number;
 }
 
-export default function Task({
-    name,
-    status,
-    id,
-    setTaskList,
-}: {
-    name: string;
-    status: string;
-    id: number;
-    setTaskList: React.Dispatch<React.SetStateAction<TaskType[]>>;
-}) {
+interface ListItemProps {
+    listItem: ListItem;
+    bgColor: string;
+    onClick: ( ListItem: ListItem, typeOfClick: string ) => void;
+}
 
-        
+export default function Task(props: ListItemProps){
+    const { name, status, id } = props.listItem;
+    const { bgColor } = props;
+    const { onClick } = props;
+
 
     /**
      * Filter the list into two arrays, once for Open tasks and once for Done tasks.
      * Sort each array by id (affectively sorting by time).
      * Append the arrays together and assign the result to the taskList.
-     * @param clickedTask of TaskType
+     * @param clickedTask of ListItem
      */
-    const handleTaskClick = (clickedTask: TaskType) => {
+    const handleCheckmarkClick = (clickedTask: ListItem) => {
         if (Platform.OS === 'ios') {
             Haptics.notificationAsync(
                 Haptics.NotificationFeedbackType.Success
             )
         };
 
-        setTaskList((prevTaskList) => {
-            const updatedTaskList = prevTaskList.map((eachTask) =>
-                eachTask.id === clickedTask.id
-                    ? { ...eachTask, status: clickedTask.status === 'Open' ? 'Done' : 'Open' }
-                    : eachTask
-            );
-
-            const allOpenTasksArray = updatedTaskList
-                .filter((eachTask) => eachTask.status === 'Open')
-                .sort((a, b) => b.id - a.id);
-            const allDoneTasksArray = updatedTaskList
-                .filter((eachTask) => eachTask.status === 'Done')
-                .sort((a, b) => b.id - a.id);
-
-            console.log(allOpenTasksArray);
-            console.log(allDoneTasksArray);
-
-            const sortedTaskList = [...allOpenTasksArray, ...allDoneTasksArray];
-
-            return sortedTaskList;
-        });
+        onClick(clickedTask, "checkedBox");
     };
 
 
@@ -72,7 +63,7 @@ export default function Task({
         return (
             <TouchableOpacity
                 style={styles.deleteButton}
-                onPress={handleTaskDeletion}
+                onPress={handleListItemDeletion}
             >
                 <Text style={{ color: 'white' }}>Delete</Text>
             </TouchableOpacity>
@@ -81,20 +72,20 @@ export default function Task({
 
 
 
-    const handleTaskDeletion = () => {
+    const handleListItemDeletion = () => {
         if (Platform.OS === 'ios') {
             Haptics.impactAsync(
                 Haptics.ImpactFeedbackStyle.Heavy
             );
         }
 
-        setTaskList((prevTaskList) => prevTaskList.filter((eachTask) => eachTask.id !== id))
+        onClick({name, status, id}, "delete");
     }
 
 
 
     // ====================================================================================================
-    // Task Component
+    // List Component
     // ====================================================================================================
     return (
         <GestureHandlerRootView>
@@ -104,7 +95,7 @@ export default function Task({
                 <View style={status === "Done" ? styles.doneTask : styles.openTask}>
                     <TouchableOpacity
                         style={status === "Done" ? styles.doneButton : styles.openButton}
-                        onPress={() => handleTaskClick({ name, status, id })}
+                        onPress={() => handleCheckmarkClick({ name, status, id })}
                     ></TouchableOpacity>
                     <Text style={status === "Done" ? styles.doneText : styles.openText}>{name}</Text>
                 </View>
@@ -130,7 +121,7 @@ const styles = StyleSheet.create({
         padding: 18,
         
         borderRadius: 15,
-        backgroundColor: '#E4EFFF',
+        // backgroundColor: '#E4EFFF',
         
         // iOS Shadow
         shadowColor: '#000', // Shadow color

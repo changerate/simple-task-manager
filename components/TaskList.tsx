@@ -13,17 +13,26 @@ import { useEffect, useState, useRef } from 'react';
 
 
 
-type TaskType = {
+// type TaskType = {
+//     name: string;
+//     status: string;
+//     id: number;
+// }
+
+
+interface TaskProps {
     name: string;
     status: string;
     id: number;
 }
 
 
+
+
 export default function TaskList() {
     // Lists and Data
     // ===========================================
-    const [taskList, setTaskList] = useState<TaskType[]>([
+    const [taskList, setTaskList] = useState<TaskProps[]>([
         {
             name: 'This is your first task! Try marking it as complete or swiping to delete it.',
             status: 'Open',
@@ -76,20 +85,60 @@ export default function TaskList() {
 
 
     /**
+     * This function handles the click abstraction from the ListItem component.
+     * The purpose is to abstract the ListItem away and only provide access to the types of clicks.
+     * @param task (type TaskProps)
+     * @param typeOfClick 
+     */
+    const handleTaskClick = (task: TaskProps, typeOfClick: string) => {
+        console.log("Task clicked!");
+
+        if (typeOfClick == 'checkedBox') {
+            setTaskList((prevTaskList) => {
+                const updatedTaskList = prevTaskList.map((eachTask) =>
+                    eachTask.id === task.id
+                        ? { ...eachTask, status: task.status === 'Open' ? 'Done' : 'Open' }
+                        : eachTask
+                );
+
+                const allOpenTasksArray = updatedTaskList
+                    .filter((eachTask) => eachTask.status === 'Open')
+                    .sort((a, b) => b.id - a.id);
+                const allDoneTasksArray = updatedTaskList
+                    .filter((eachTask) => eachTask.status === 'Done')
+                    .sort((a, b) => b.id - a.id);
+
+                console.log(allOpenTasksArray);
+                console.log(allDoneTasksArray);
+
+                const sortedTaskList = [...allOpenTasksArray, ...allDoneTasksArray];
+
+                return sortedTaskList;
+            });
+        }
+
+        else if (typeOfClick == 'delete') {
+            setTaskList((prevTaskList) => prevTaskList.filter((eachTask) => eachTask.id !== task.id))
+        }
+
+        else { console.log(typeOfClick, " this click type has not been handled correctly yet!") };
+    }
+
+
+
+    /**
      * Render each item in the flatlist by passing the properties to the Task component.
      * @param param0 
      * @returns 
      */
-    const renderItem = ({ item }: { item: { name: string; status: string; id: number } }) => {
+    const renderItem = ({ item }: { item: TaskProps }) => {
         return (
             <Task
-                name={item.name}
-                status={item.status}
-                id={item.id}
-                setTaskList={setTaskList}
+                listItem={item}
+                onClick={handleTaskClick}
             />
-        )
-    }
+        );
+    };
 
 
 
